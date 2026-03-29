@@ -1,0 +1,123 @@
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Loja Pokémon</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #f2f2f2;
+    text-align: center;
+}
+
+header {
+    background: red;
+    color: white;
+    padding: 15px;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    background: white;
+    width: 200px;
+    margin: 15px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.card img {
+    width: 100%;
+}
+
+button {
+    background: red;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🔥 Loja Pokémon 🔥</h1>
+<p>Compre suas cartas</p>
+</header>
+
+<div class="container" id="produtos"></div>
+
+<script>
+
+// 🔥 SUA CHAVE PIX
+const pix = "63c80eb0-0714-49da-9ba1-5017119ac839";
+
+// 📦 PRODUTOS (SÓ VOCÊ MEXE AQUI)
+let produtos = [
+    {
+        nome: "Charizard VMAX",
+        preco: 199.90,
+        estoque: 3,
+        img: "https://images.pokemontcg.io/swsh4/44.png"
+    },
+    {
+        nome: "Rayquaza V",
+        preco: 89.90,
+        estoque: 5,
+        img: "https://images.pokemontcg.io/swsh7/110.png"
+    }
+];
+
+// 🛒 MOSTRAR PRODUTOS
+function mostrarProdutos() {
+    let html = "";
+
+    produtos.forEach((p, i) => {
+        html += `
+        <div class="card">
+            <img src="${p.img}">
+            <h2>${p.nome}</h2>
+            <p>R$ ${p.preco}</p>
+            <p>📦 Estoque: ${p.estoque}</p>
+            <button onclick="comprar(${i})">Comprar</button>
+        </div>
+        `;
+    });
+
+    document.getElementById("produtos").innerHTML = html;
+}
+
+// 💸 COMPRAR
+function comprar(i) {
+    let p = produtos[i];
+
+    if(p.estoque > 0){
+        alert(
+            "Produto: " + p.nome +
+            "\nPreço: R$ " + p.preco +
+            "\n\n💳 Pix: " + pix +
+            "\n\nApós pagar, envie o comprovante!"
+        );
+
+        // diminuir estoque
+        p.estoque--;
+
+        mostrarProdutos();
+    } else {
+        alert("❌ Produto esgotado!");
+    }
+}
+
+mostrarProdutos();
+
+</script>
+
+</body>
+</html>
